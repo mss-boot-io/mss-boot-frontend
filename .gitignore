@@ -38,4 +38,4 @@ screenshot
 
 build
 
-config/*.js
+config/*.json
