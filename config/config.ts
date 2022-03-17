@@ -9,7 +9,10 @@ import routes from './routes';
 const { REACT_APP_ENV } = process.env;
 
 export default defineConfig({
-  hash: true,
+  base: '/mss-boot-frontend/',
+  publicPath: '/mss-boot-frontend/',
+  hash: false,
+  history: { type: 'hash' },
   antd: {},
   dva: {
     hmr: true,
