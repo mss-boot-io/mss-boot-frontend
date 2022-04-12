@@ -4758,6 +4758,11 @@ carlo@^0.9.46:
     debug "^4.1.0"
     puppeteer-core "~1.12.0"
 
+casdoor-js-sdk@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.npmmirror.com/casdoor-js-sdk/-/casdoor-js-sdk-0.2.7.tgz#09342f6715977bc1991222d04dd36c93b5f0872b"
+  integrity sha512-pEI7chd6KWDa7dhBxl3zDY+LagG40bBPoxdPMOZ5OG2gFMTXwRQ4Ka1do0giJsd2YTeAU3u6vwP62YmiQVzgSQ==
+
 caseless@~0.12.0:
   version "0.12.0"
   resolved "https://registry.npmmirror.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"

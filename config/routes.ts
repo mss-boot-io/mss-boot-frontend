@@ -52,7 +52,7 @@
     path: '/generator',
     name: 'generator',
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     component: './generator/ServiceList',
     routes: [
       {
