@@ -74,6 +74,13 @@ export default defineConfig({
       mock: false,
       projectName: 'tenant',
     },
+    {
+      requestLibPath: "import { request } from 'umi'",
+      // 或者使用在线的版本
+      schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/generator.json',
+      mock: false,
+      projectName: 'generator',
+    },
   ],
   nodeModulesTransform: { type: 'none' },
   mfsu: {},

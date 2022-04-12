@@ -16,8 +16,8 @@ type CreateFormProps = {
   onDone: () => void;
 };
 
-const CreateForm: React.FC<CreateFormProps> = (props) => {
-  const { visible, onVisibleChange, onSuccess, id, done, onDone } = props;
+const ControlForm: React.FC<CreateFormProps> = (props) => {
+  const { visible, onVisibleChange, onSuccess, id, done } = props;
   const formRef = useRef<ProFormInstance>();
   const { run } = useRequest(id ? putServiceById : postService, {
     manual: true,
@@ -50,7 +50,7 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
         visible={visible}
         onFinish={onFinish}
         drawerProps={{
-          onclose: () => onDone(),
+          // onClose: () => onDone(),
           destroyOnClose: true,
           bodyStyle: done ? { padding: '72px 0' } : {},
         }}
@@ -58,8 +58,8 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
           id
             ? async () => {
                 console.log(id);
-                return getServiceById({ id }).then((data) => {
-                  return data;
+                return getServiceById({ id }).then((e) => {
+                  return e.data;
                 });
               }
             : undefined
@@ -103,4 +103,4 @@ const CreateForm: React.FC<CreateFormProps> = (props) => {
   );
 };
 
-export default CreateForm;
+export default ControlForm;
