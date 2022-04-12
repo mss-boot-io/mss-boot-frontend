@@ -17,7 +17,11 @@ export default {
       changeOrigin: true,
     },
     '/generator/api': {
-      target: 'http://localhost:8001',
+      target: 'http://localhost:8002',
+      changeOrigin: true,
+    },
+    '/tenant/api': {
+      target: 'http://localhost:9094',
       changeOrigin: true,
     },
   },

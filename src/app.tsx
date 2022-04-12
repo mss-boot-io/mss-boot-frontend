@@ -5,9 +5,11 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history, Link } from 'umi';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
+import { getClient } from './services/tenant/tenant';
+import type { SdkConfig } from 'casdoor-js-sdk';
+import { getCurrentUser } from './services/tenant/tenant';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -24,17 +26,21 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
+  sdkConfig?: SdkConfig;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser();
+      const msg = await getCurrentUser();
       return msg.data;
     } catch (error) {
       history.push(loginPath);
     }
     return undefined;
   };
+  const { data } = await getClient();
+  const sdkConfig = data;
+
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
@@ -42,11 +48,13 @@ export async function getInitialState(): Promise<{
       fetchUserInfo,
       currentUser,
       settings: defaultSettings,
+      sdkConfig,
     };
   }
   return {
     fetchUserInfo,
     settings: defaultSettings,
+    sdkConfig,
   };
 }
 
@@ -104,4 +112,35 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     ...initialState?.settings,
   };
+};
+
+export const request = {
+  middlewares: [
+    async function middlewareToken(ctx, next) {
+      const token = JSON.parse(localStorage.getItem('token'));
+      if (!token) {
+        await next();
+        return;
+      }
+      const { req } = ctx;
+      const { url, options } = req;
+      if (
+        url.indexOf('/tenant/api/v1/callback') != 0 ||
+        url.indexOf('/tenant/api/v1/client') != 0
+      ) {
+        options.headers = {
+          ...options.headers,
+          Authorization: `${token.tokenType} ${token.accessToken}`,
+        };
+        ctx.req.options = options;
+      }
+      await next();
+      const { res } = ctx;
+      const { success = false, errorCode } = res;
+      if (!success && errorCode == '401') {
+        localStorage.removeItem('token');
+        history.go('/user/login');
+      }
+    },
+  ],
 };

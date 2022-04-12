@@ -23,10 +23,8 @@ export default defineConfig({
   //     changeOrigin: true,
   //   },
   // },
-  base: '/mss-boot-frontend/',
-  publicPath: '/mss-boot-frontend/',
-  hash: true,
-  history: { type: 'hash' },
+  hash: false,
+  // history: { type: 'hash' },
   antd: {},
   dva: {
     hmr: true,
@@ -72,14 +70,9 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from 'umi'",
       // 或者使用在线的版本
-      // schemaPath: "https://gw.alipayobjects.com/os/antfincdn/M%24jrzTTYJN/oneapi.json"
-      schemaPath: join(__dirname, 'oneapi.json'),
+      schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/tenant.json',
       mock: false,
-    },
-    {
-      requestLibPath: "import { request } from 'umi'",
-      schemaPath: 'https://gw.alipayobjects.com/os/antfincdn/CA1dOm%2631B/openapi.json',
-      projectName: 'swagger',
+      projectName: 'tenant',
     },
   ],
   nodeModulesTransform: { type: 'none' },
