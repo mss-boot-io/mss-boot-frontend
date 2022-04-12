@@ -6,7 +6,7 @@ import ProTable from '@ant-design/pro-table';
 import type { ServiceListItem } from '@/services/generator/service';
 import { deleteServiceById } from '@/services/generator/service';
 import { getService } from '@/services/generator/service';
-import CreateForm from './components/CreateForm';
+import ControlForm from './components/ControlForm';
 
 export default () => {
   const ref = useRef<ActionType>();
@@ -15,7 +15,7 @@ export default () => {
   const visibleCallback = (t) => {
     setVisible(t);
     if (!t) {
-      setID('')
+      setID('');
     }
   };
   const columns: ProColumns<ServiceListItem>[] = [
@@ -52,7 +52,7 @@ export default () => {
       sorter: (a, b) => a.createdAt - b.createdAt,
     },
     {
-      title: '备注',
+      title: '描述',
       dataIndex: 'description',
       ellipsis: true,
       copyable: true,
@@ -140,7 +140,7 @@ export default () => {
           </Button>,
         ]}
       />
-      <CreateForm
+      <ControlForm
         visible={visible}
         id={id || ''}
         onVisibleChange={visibleCallback}
