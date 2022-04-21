@@ -70,16 +70,10 @@ export default defineConfig({
     {
       requestLibPath: "import { request } from 'umi'",
       // 或者使用在线的版本
-      schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/tenant.json',
+      // schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/tenant.json',
+      schemaPath: 'https://mss-boot-io.gitee.io/mss-boot/swagger/tenant.json',
       mock: false,
       projectName: 'tenant',
-    },
-    {
-      requestLibPath: "import { request } from 'umi'",
-      // 或者使用在线的版本
-      schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/generator.json',
-      mock: false,
-      projectName: 'generator',
     },
   ],
   nodeModulesTransform: { type: 'none' },

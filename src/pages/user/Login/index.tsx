@@ -2,8 +2,6 @@ import { message } from 'antd';
 import React from 'react';
 import { useIntl, history, SelectLang, useModel, useLocation } from 'umi';
 import Footer from '@/components/Footer';
-// import type { SdkConfig } from 'casdoor-js-sdk';
-import Sdk from 'casdoor-js-sdk';
 
 import styles from './index.less';
 import { getCallback } from '@/services/tenant/tenant';
@@ -27,11 +25,11 @@ const Login: React.FC = () => {
   if (config) {
     config.redirectPath = '/user/login';
   }
-  const sdk = new Sdk(config);
   const location = useLocation();
-  console.log(sdk.getSigninUrl());
   const token = JSON.parse(localStorage.getItem('token'));
-  if (location.query?.code || token) {
+  if (location.query?.error) {
+    message.error(location.query.error);
+  } else if (location.query?.code || token) {
     // if (token) {
     //   fetchUserInfo().then(() => {});
     //   return;
@@ -61,7 +59,7 @@ const Login: React.FC = () => {
     }
   } else {
     //跳转登录
-    window.location.href = sdk.getSigninUrl();
+    window.location.href = config.authCodeURL;
   }
 
   return (
