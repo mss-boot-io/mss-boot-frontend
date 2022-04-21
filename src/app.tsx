@@ -136,8 +136,8 @@ export const request = {
       }
       await next();
       const { res } = ctx;
-      const { success = false, errorCode } = res;
-      if (!success && errorCode == '401') {
+      const { errorCode } = res;
+      if (errorCode == '401') {
         localStorage.removeItem('token');
         history.go('/user/login');
       }
