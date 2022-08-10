@@ -1,4 +1,6 @@
 export default {
+  'menu.generate': 'Generate Code',
+  'menu.menu': 'Menu',
   'menu.welcome': 'Welcome',
   'menu.more-blocks': 'More Blocks',
   'menu.home': 'Home',

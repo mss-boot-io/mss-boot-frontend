@@ -1,47 +1,24 @@
 import { message } from 'antd';
 import React from 'react';
-import { useIntl, history, SelectLang, useModel, useLocation } from 'umi';
-import Footer from '@/components/Footer';
+import { LoginForm } from '@ant-design/pro-form';
+import { useIntl, SelectLang, useLocation } from 'umi';
 
 import styles from './index.less';
-import { getCallback } from '@/services/tenant/tenant';
+import { getClient, getCallback } from '@/services/admin/admin';
 
 const Login: React.FC = () => {
-  const { initialState, setInitialState } = useModel('@@initialState');
-
   const intl = useIntl();
 
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {
-      await setInitialState((s) => ({
-        ...s,
-        currentUser: userInfo,
-      }));
-    }
-  };
-
-  const config = initialState?.sdkConfig;
-  if (config) {
-    config.redirectPath = '/user/login';
-  }
   const location = useLocation();
-  const token = JSON.parse(localStorage.getItem('token'));
-  if (location.query?.error) {
-    message.error(location.query.error);
-  } else if (location.query?.code || token) {
-    // if (token) {
-    //   fetchUserInfo().then(() => {});
-    //   return;
-    // }
-    //发送获取accessToken请求
-    const { query } = history.location;
-    const { redirect } = query as { redirect: string };
-    if (token) {
-      fetchUserInfo().then(() => {
-        history.push(redirect || '/');
-      });
-    } else {
+  React.useEffect(() => {
+    console.log(location.query);
+    if (location.query && location.query.error) {
+      //callback
+      message.error(location.query.error);
+    } else if (location.query && location.query.code) {
+      //发送获取accessToken请求
+      // const { query } = history.location;
+
       getCallback(location.query).then((e) => {
         const { data } = e;
         localStorage.setItem('token', JSON.stringify(data));
@@ -51,24 +28,49 @@ const Login: React.FC = () => {
           defaultMessage: '登录成功！正在获取用户信息...',
         });
         message.success(defaultLoginSuccessMessage).then(() => {
-          fetchUserInfo().then(() => {
-            history.push(redirect || '/');
-          });
+          console.log('welcome');
+          // history.replace('/welcome');
+          window.location.href = window.location.origin;
         });
       });
     }
-  } else {
-    //跳转登录
-    window.location.href = config.authCodeURL;
-  }
+  }, [intl, location.query]);
+
+  const handleSubmit = async () => {
+    try {
+      const client = await getClient();
+      if (!client.data) {
+        message.error(client.msg);
+      }
+      // 登录
+      window.location.href = client.data?.authCodeURL || '';
+    } catch (error) {
+      const defaultLoginFailureMessage = intl.formatMessage({
+        id: 'pages.login.failure',
+        defaultMessage: '登录失败，请重试！',
+      });
+      message.error(defaultLoginFailureMessage);
+    }
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.lang} data-lang>
         {SelectLang && <SelectLang />}
       </div>
-      <div className={styles.content}>登录中...</div>
-      <Footer />
+      <div className={styles.content}>
+        <LoginForm
+          // logo={<img alt="logo" src="logo.svg" />}
+          title="mss-boot-io"
+          subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
+          initialValues={{
+            autoLogin: true,
+          }}
+          onFinish={async () => {
+            await handleSubmit();
+          }}
+        />
+      </div>
     </div>
   );
 };

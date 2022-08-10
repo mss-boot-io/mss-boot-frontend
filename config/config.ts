@@ -1,6 +1,5 @@
 // https://umijs.org/config/
 import { defineConfig } from 'umi';
-import { join } from 'path';
 
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
@@ -71,9 +70,17 @@ export default defineConfig({
       requestLibPath: "import { request } from 'umi'",
       // 或者使用在线的版本
       // schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/tenant.json',
-      schemaPath: 'https://mss-boot-io.gitee.io/mss-boot/swagger/tenant.json',
+      schemaPath: 'https://mss-boot-io.github.io/mss-boot-monorepo/swagger/admin.json',
       mock: false,
-      projectName: 'tenant',
+      projectName: 'admin',
+    },
+    {
+      requestLibPath: "import { request } from 'umi'",
+      // 或者使用在线的版本
+      // schemaPath: 'https://mss-boot-io.github.io/mss-boot/swagger/tenant.json',
+      schemaPath: 'https://mss-boot-io.github.io/mss-boot-monorepo/swagger/generator.json',
+      mock: false,
+      projectName: 'generator',
     },
   ],
   nodeModulesTransform: { type: 'none' },

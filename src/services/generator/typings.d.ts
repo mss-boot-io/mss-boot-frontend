@@ -1,129 +1,70 @@
 declare namespace API {
-  type ModelCreateReq = {
-    description?: string;
-    metadata?: any;
-    name?: string;
+  type GenerateParams = {
+    params?: Record<string, any>;
+    repo: string;
     service?: string;
   };
 
-  type ModelGetResp = {
-    createdAt?: string;
-    description?: string;
-    id?: string;
-    metadata?: any;
-    name?: string;
-    service?: string;
-    status?: number;
-    updatedAt?: string;
+  type TemplateGenerateReq = {
+    generate?: GenerateParams;
+    template?: TemplateParams;
   };
 
-  type ModelListItem = {
-    createdAt?: string;
-    description?: string;
-    id?: string;
-    name?: string;
-    service?: string;
-    status?: number;
-    updatedAt?: string;
+  type TemplateGenerateResp = {
+    branch?: string;
+    repo?: string;
   };
 
-  type ModelUpdateReq = {
-    description?: string;
-    metadata?: any;
-    name?: string;
-    service?: string;
+  type TemplateGetBranchesResp = {
+    branches?: string[];
   };
 
-  type ServiceCreateReq = {
-    description?: string;
-    metadata?: any;
-    name?: string;
+  type TemplateGetParamsResp = {
+    params?: TemplateParam[];
   };
 
-  type ServiceGetResp = {
-    createdAt?: string;
-    description?: string;
-    id?: string;
-    metadata?: any;
-    name?: string;
-    status?: number;
-    updatedAt?: string;
+  type TemplateGetPathResp = {
+    path?: string[];
   };
 
-  type ServiceListItem = {
-    createdAt?: string;
-    description?: string;
-    id?: string;
+  type TemplateParam = {
     name?: string;
-    status?: number;
-    updatedAt?: string;
+    tip?: string;
   };
 
-  type ServiceUpdateReq = {
-    description?: string;
-    metadata?: any;
-    name?: string;
-  };
-
-  type Page = {
-    current?: number;
-    pageSize?: number;
-    total?: number;
+  type TemplateParams = {
+    branch?: string;
+    path?: string;
+    source: string;
   };
 
   type Response = {
-    code?: number;
-    msg?: string;
-    /** 数据集 */
-    requestId?: string;
-    status?: string;
+    errorCode?: string;
+    errorMessage?: string;
+    host?: string;
+    showType?: number;
+    success?: boolean;
+    traceId?: string;
   };
 
   type undefinedParams = {
-    /** 名称 */
-    name?: string;
-    /** 当前页 */
-    page?: string;
-    /** 每页容量 */
-    pageSize?: string;
+    /** template source */
+    source: string;
   };
 
   type undefinedParams = {
-    /** id */
-    id: string;
+    /** template source */
+    source: string;
+    /** branch default:HEAD */
+    branch?: string;
+    /** path default:. */
+    path?: string;
   };
 
   type undefinedParams = {
-    /** id */
-    id: string;
-  };
-
-  type undefinedParams = {
-    /** id */
-    id: string;
-  };
-
-  type undefinedParams = {
-    /** 名称 */
-    name?: string;
-    /** 当前页 */
-    page?: string;
-    /** 每页容量 */
-    pageSize?: string;
-  };
-
-  type undefinedParams = {
-    /** id */
-    id: string;
-  };
-
-  type undefinedParams = {
-    /** id */
-    id: string;
-  };
-
-  type undefinedParams = {
-    /** id */
-    id: string;
+    /** template source */
+    source: string;
+    /** branch default:HEAD */
+    branch?: string;
   };
 }

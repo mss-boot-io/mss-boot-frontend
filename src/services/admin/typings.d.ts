@@ -70,6 +70,106 @@ declare namespace API {
     weibo?: string;
   };
 
+  type MenuCreateReq = {
+    /** 权限 */
+    access: string;
+    /** 组件 */
+    component?: string;
+    /** icon */
+    icon?: string;
+    /** Layout */
+    layout?: boolean;
+    /** 名称 */
+    name: string;
+    /** 父菜单 */
+    parentKeys?: string[];
+    /** 路径 */
+    path: string;
+    /** 重定向 */
+    redirect?: string;
+    /** 状态 */
+    status?: number;
+    /** 租户id */
+    tenantID: string;
+  };
+
+  type MenuGetResp = {
+    /** 权限 */
+    access?: string;
+    /** 组件 */
+    component?: string;
+    /** 创建时间 */
+    createdAt?: string;
+    /** icon */
+    icon?: string;
+    /** id */
+    id?: string;
+    /** Layout */
+    layout?: boolean;
+    /** 名称 */
+    name?: string;
+    /** <no value> */
+    parentKeys?: string[];
+    /** 路径 */
+    path?: string;
+    /** 重定向 */
+    redirect?: string;
+    /** 状态 */
+    status?: number;
+    /** 租户id */
+    tenantID?: string;
+    /** 更新时间 */
+    updatedAt?: string;
+  };
+
+  type MenuListItem = {
+    /** 权限 */
+    access?: string;
+    /** 组件 */
+    component?: string;
+    /** icon */
+    icon?: string;
+    /** id */
+    id?: string;
+    /** Layout */
+    layout?: boolean;
+    /** 名称 */
+    name?: string;
+    /** <no value> */
+    parentKeys?: string[];
+    /** 路径 */
+    path?: string;
+    /** 重定向 */
+    redirect?: string;
+    /** 状态 */
+    status?: number;
+    /** 租户id */
+    tenantID?: string;
+  };
+
+  type MenuUpdateReq = {
+    /** 权限 */
+    access: string;
+    /** 组件 */
+    component?: string;
+    /** icon */
+    icon?: string;
+    /** Layout */
+    layout?: boolean;
+    /** 名称 */
+    name: string;
+    /** 父菜单 */
+    parentKeys?: string[];
+    /** 路径 */
+    path: string;
+    /** 重定向 */
+    redirect?: string;
+    /** 状态 */
+    status?: number;
+    /** 租户id */
+    tenantID: string;
+  };
+
   type TenantCallbackResp = {
     /** AccessToken is the token that authorizes and authenticates
 the requests. */
@@ -91,6 +191,7 @@ The Type method returns either this or "Bearer", the default. */
 
   type TenantClientResp = {
     appName?: string;
+    authCodeURL?: string;
     clientId?: string;
     organizationName?: string;
     serverUrl?: string;
@@ -205,8 +306,32 @@ The Type method returns either this or "Bearer", the default. */
   };
 
   type undefinedParams = {
-    /** refresh_token */
-    refresh_token?: string;
+    /** 租户名称 */
+    name?: string;
+    /** 当前页 */
+    page?: string;
+    /** 每页容量 */
+    pageSize?: string;
+  };
+
+  type undefinedParams = {
+    /** id */
+    id: string;
+  };
+
+  type undefinedParams = {
+    /** id */
+    id: string;
+  };
+
+  type undefinedParams = {
+    /** id */
+    id: string;
+  };
+
+  type undefinedParams = {
+    /** refreshToken */
+    refreshToken?: string;
   };
 
   type undefinedParams = {

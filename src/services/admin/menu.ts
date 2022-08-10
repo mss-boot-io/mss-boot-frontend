@@ -2,13 +2,13 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 列表service 列表service GET /generator/api/v1/service */
-export async function getService(
+/** 列表menu 列表menu GET /admin/api/v1/menu */
+export async function getMenu(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.Page & { data?: API.ServiceListItem[] }>('/generator/api/v1/service', {
+  return request<API.Page & { data?: API.MenuListItem[] }>('/admin/api/v1/menu', {
     method: 'GET',
     params: {
       ...params,
@@ -17,9 +17,9 @@ export async function getService(
   });
 }
 
-/** 创建service 创建service POST /generator/api/v1/service */
-export async function postService(body: API.ServiceCreateReq, options?: { [key: string]: any }) {
-  return request<API.Response>('/generator/api/v1/service', {
+/** 创建menu 创建menu POST /admin/api/v1/menu */
+export async function postMenu(body: API.MenuCreateReq, options?: { [key: string]: any }) {
+  return request<API.Response>('/admin/api/v1/menu', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -29,32 +29,29 @@ export async function postService(body: API.ServiceCreateReq, options?: { [key: 
   });
 }
 
-/** 获取service 获取service GET /generator/api/v1/service/${param0} */
-export async function getServiceById(
+/** 获取menu 获取menu GET /admin/api/v1/menu/${param0} */
+export async function getMenuById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.Response & { data?: API.ServiceGetResp }>(
-    `/generator/api/v1/service/${param0}`,
-    {
-      method: 'GET',
-      params: { ...queryParams },
-      ...(options || {}),
-    },
-  );
+  return request<API.Response & { data?: API.MenuGetResp }>(`/admin/api/v1/menu/${param0}`, {
+    method: 'GET',
+    params: { ...queryParams },
+    ...(options || {}),
+  });
 }
 
-/** 更新service 更新service PUT /generator/api/v1/service/${param0} */
-export async function putServiceById(
+/** 更新menu 更新menu PUT /admin/api/v1/menu/${param0} */
+export async function putMenuById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
-  body: API.ServiceUpdateReq,
+  body: API.MenuUpdateReq,
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.Response>(`/generator/api/v1/service/${param0}`, {
+  return request<API.Response>(`/admin/api/v1/menu/${param0}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -65,14 +62,14 @@ export async function putServiceById(
   });
 }
 
-/** 删除service 删除service DELETE /generator/api/v1/service/${param0} */
-export async function deleteServiceById(
+/** 删除menu 删除menu DELETE /admin/api/v1/menu/${param0} */
+export async function deleteMenuById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.Response>(`/generator/api/v1/service/${param0}`, {
+  return request<API.Response>(`/admin/api/v1/menu/${param0}`, {
     method: 'DELETE',
     params: { ...queryParams },
     ...(options || {}),
