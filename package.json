@@ -4,6 +4,7 @@
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
   "scripts": {
+    "set:origin": "cross-env BASE_ORIGIN=https://api.mss-boot-io.top",
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
     "deploy": "npm run build && npm run gh-pages",
@@ -48,6 +49,7 @@
   ],
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@ant-design/pro-components": "^1.1.15",
     "@ant-design/pro-descriptions": "^1.10.0",
     "@ant-design/pro-form": "^1.52.0",
     "@ant-design/pro-layout": "^6.32.0",

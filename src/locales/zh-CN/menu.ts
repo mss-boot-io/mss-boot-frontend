@@ -1,4 +1,6 @@
 export default {
+  'menu.generate': '代码生成',
+  'menu.menu': '菜单',
   'menu.welcome': '欢迎',
   'menu.more-blocks': '更多区块',
   'menu.home': '首页',

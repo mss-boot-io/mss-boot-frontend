@@ -7,12 +7,13 @@ import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
-import { getClient } from './services/tenant/tenant';
-import type { SdkConfig } from 'casdoor-js-sdk';
-import { getCurrentUser } from './services/tenant/tenant';
+import { getCurrentUser } from './services/admin/admin';
+import { getMenu } from './services/admin/menu';
+import { MenuDataItem } from '@umijs/route-utils';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
+const callbackPath = '/callback/dexidp';
 
 /** 获取用户信息比较慢的时候会展示一个 loading */
 export const initialStateConfig = {
@@ -26,7 +27,6 @@ export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
-  sdkConfig?: SdkConfig;
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
@@ -38,29 +38,86 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
-  const { data } = await getClient();
-  const sdkConfig = data;
 
   // 如果是登录页面，不执行
-  if (history.location.pathname !== loginPath) {
+  if (history.location.pathname !== loginPath && history.location.pathname !== callbackPath) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
       currentUser,
       settings: defaultSettings,
-      sdkConfig,
     };
   }
   return {
     fetchUserInfo,
     settings: defaultSettings,
-    sdkConfig,
   };
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
+  const routes = [
+    {
+      path: '/user',
+      layout: false,
+      routes: [
+        {
+          path: '/user',
+          routes: [
+            {
+              name: 'login',
+              path: '/user/login',
+              component: './user/Login',
+            },
+          ],
+        },
+        {
+          component: './404',
+        },
+      ],
+    },
+    {
+      component: './404',
+    },
+  ];
   return {
+    menu: {
+      params: {
+        pageSize: 10000,
+      },
+      request: async (params) => {
+        let data:
+          | (
+              | {
+                  path: string;
+                  layout: boolean;
+                  routes: (
+                    | {
+                        path: string;
+                        routes: { name: string; path: string; component: string }[];
+                        component?: undefined;
+                      }
+                    | { component: string; path?: undefined; routes?: undefined }
+                  )[];
+                  component?: undefined;
+                }
+              | { component: string; path?: undefined; layout?: undefined; routes?: undefined }
+            )[]
+          | API.MenuListItem[]
+          | MenuDataItem[]
+          | PromiseLike<MenuDataItem[]> = routes;
+        if (location.pathname !== loginPath && history.location.pathname !== callbackPath) {
+          try {
+            const menuData = await getMenu(params);
+            data = menuData.data || routes;
+          } catch (error) {
+            data = routes;
+          }
+        }
+
+        return data;
+      },
+    },
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
@@ -70,7 +127,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      if (
+        !initialState?.currentUser &&
+        location.pathname !== loginPath &&
+        history.location.pathname !== callbackPath
+      ) {
         history.push(loginPath);
       }
     },
@@ -124,10 +185,7 @@ export const request = {
       }
       const { req } = ctx;
       const { url, options } = req;
-      if (
-        url.indexOf('/tenant/api/v1/callback') != 0 ||
-        url.indexOf('/tenant/api/v1/client') != 0
-      ) {
+      if (url.indexOf('/admin/api/v1/callback') != 0 || url.indexOf('/admin/api/v1/client') != 0) {
         options.headers = {
           ...options.headers,
           Authorization: `${token.tokenType} ${token.accessToken}`,

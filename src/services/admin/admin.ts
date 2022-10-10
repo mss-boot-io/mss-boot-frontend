@@ -2,13 +2,13 @@
 /* eslint-disable */
 import { request } from 'umi';
 
-/** 获取access_token 获取access_token GET /tenant/api/v1/callback */
+/** 获取access_token 获取access_token GET /admin/api/v1/callback */
 export async function getCallback(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.TenantCallbackResp>('/tenant/api/v1/callback', {
+  return request<API.Response & { data?: API.TenantCallbackResp }>('/admin/api/v1/callback', {
     method: 'GET',
     params: {
       ...params,
@@ -17,29 +17,29 @@ export async function getCallback(
   });
 }
 
-/** 获取client配置 获取client配置 GET /tenant/api/v1/client */
+/** 获取client配置 获取client配置 GET /admin/api/v1/client */
 export async function getClient(options?: { [key: string]: any }) {
-  return request<API.TenantClientResp>('/tenant/api/v1/client', {
+  return request<API.Response & { data?: API.TenantClientResp }>('/admin/api/v1/client', {
     method: 'GET',
     ...(options || {}),
   });
 }
 
-/** 获取当前用户 获取当前用户 GET /tenant/api/v1/current-user */
+/** 获取当前用户 获取当前用户 GET /admin/api/v1/current-user */
 export async function getCurrentUser(options?: { [key: string]: any }) {
-  return request<API.Claims>('/tenant/api/v1/current-user', {
+  return request<API.Response & { data?: API.Claims }>('/admin/api/v1/current-user', {
     method: 'GET',
     ...(options || {}),
   });
 }
 
-/** 获取access_token 获取access_token GET /tenant/api/v1/refresh-token */
+/** 获取accessToken 获取accessToken GET /admin/api/v1/refresh-token */
 export async function getRefreshToken(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.TenantCallbackResp>('/tenant/api/v1/refresh-token', {
+  return request<API.Response & { data?: API.TenantCallbackResp }>('/admin/api/v1/refresh-token', {
     method: 'GET',
     params: {
       ...params,
@@ -48,13 +48,13 @@ export async function getRefreshToken(
   });
 }
 
-/** 列表tenant 列表tenant GET /tenant/api/v1/tenant */
+/** 列表tenant 列表tenant GET /admin/api/v1/tenant */
 export async function getTenant(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.Page & { data?: API.TenantListItem[] }>('/tenant/api/v1/tenant', {
+  return request<API.Page & { data?: API.TenantListItem[] }>('/admin/api/v1/tenant', {
     method: 'GET',
     params: {
       ...params,
@@ -63,9 +63,9 @@ export async function getTenant(
   });
 }
 
-/** 创建tenant 创建tenant POST /tenant/api/v1/tenant */
+/** 创建tenant 创建tenant POST /admin/api/v1/tenant */
 export async function postTenant(body: API.TenantCreateReq, options?: { [key: string]: any }) {
-  return request<API.Response>('/tenant/api/v1/tenant', {
+  return request<API.Response>('/admin/api/v1/tenant', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -75,21 +75,21 @@ export async function postTenant(body: API.TenantCreateReq, options?: { [key: st
   });
 }
 
-/** 获取tenant 获取tenant GET /tenant/api/v1/tenant/${param0} */
+/** 获取tenant 获取tenant GET /admin/api/v1/tenant/${param0} */
 export async function getTenantById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.TenantGetResp>(`/tenant/api/v1/tenant/${param0}`, {
+  return request<API.Response & { data?: API.TenantGetResp }>(`/admin/api/v1/tenant/${param0}`, {
     method: 'GET',
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 更新tenant 更新tenant PUT /tenant/api/v1/tenant/${param0} */
+/** 更新tenant 更新tenant PUT /admin/api/v1/tenant/${param0} */
 export async function putTenantById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
@@ -97,7 +97,7 @@ export async function putTenantById(
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.Response>(`/tenant/api/v1/tenant/${param0}`, {
+  return request<API.Response>(`/admin/api/v1/tenant/${param0}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -108,14 +108,14 @@ export async function putTenantById(
   });
 }
 
-/** 删除tenant 删除tenant DELETE /tenant/api/v1/tenant/${param0} */
+/** 删除tenant 删除tenant DELETE /admin/api/v1/tenant/${param0} */
 export async function deleteTenantById(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.undefinedParams,
   options?: { [key: string]: any },
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<API.Response>(`/tenant/api/v1/tenant/${param0}`, {
+  return request<API.Response>(`/admin/api/v1/tenant/${param0}`, {
     method: 'DELETE',
     params: { ...queryParams },
     ...(options || {}),
