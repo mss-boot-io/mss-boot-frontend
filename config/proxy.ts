@@ -17,11 +17,11 @@ export default {
       changeOrigin: true,
     },
     '/generator/api': {
-      target: 'http://localhost:8081',
+      target: 'https://api.mss-boot-io.top',
       changeOrigin: true,
     },
     '/admin/api': {
-      target: 'http://localhost:8080',
+      target: 'https://api.mss-boot-io.top',
       changeOrigin: true,
     },
   },
