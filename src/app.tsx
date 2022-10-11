@@ -199,7 +199,7 @@ export const request = {
         localStorage.removeItem('token');
         history.go('/user/login');
       }
-      req.url = `${process.env.BASE_URL}${url}${url}`;
+      req.url = `${process.env.BASE_URL}${url}`;
     },
   ],
 };
