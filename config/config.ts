@@ -87,7 +87,4 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
-  define: {
-    'process.env.BASE_URL': `${process.env.BASE_ORIGIN}`,
-  },
 });
