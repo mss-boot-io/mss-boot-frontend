@@ -192,7 +192,7 @@ export const request = {
         };
         ctx.req.options = options;
       }
-      req.url = `${process.env.BASE_URL}${url}`;
+      req.url = `${API_URL}${url}`;
       await next();
       const { res } = ctx;
       const { errorCode } = res;

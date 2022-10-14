@@ -7,6 +7,8 @@
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
     "build:dev": "cross-env REACT_APP_ENV=dev UMI_ENV=dev umi build",
+    "build:alpha": "cross-env REACT_APP_ENV=alpha UMI_ENV=alpha umi build",
+    "build:beta": "cross-env REACT_APP_ENV=beta UMI_ENV=beta umi build",
     "build:prod": "cross-env REACT_APP_ENV=prod UMI_ENV=prod umi build",
     "deploy": "npm run build && npm run gh-pages",
     "dev": "npm run start:dev",
