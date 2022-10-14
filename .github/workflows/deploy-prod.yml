@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    uses: mss-boot/mss-boot-frontend/.github/workflows/deploy-cloudflare.yml@main
+    uses: mss-boot-io/mss-boot-frontend/.github/workflows/deploy-cloudflare.yml@main
     with:
       stage: "prod"
     secrets:
