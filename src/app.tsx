@@ -192,6 +192,7 @@ export const request = {
         };
         ctx.req.options = options;
       }
+      req.url = `${process.env.BASE_URL}${url}`;
       await next();
       const { res } = ctx;
       const { errorCode } = res;
@@ -199,7 +200,6 @@ export const request = {
         localStorage.removeItem('token');
         history.go('/user/login');
       }
-      req.url = `${process.env.BASE_URL}${url}`;
     },
   ],
 };
