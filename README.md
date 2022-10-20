@@ -1,57 +1,43 @@
-# Ant Design Pro
+# mss-boot-frontend
 
-This project is initialized with [Ant Design Pro](https://pro.ant.design). Follow is the quick guide for how to use.
+---
 
-## Environment Prepare
+<img align="right" width="320" src="https://mss-boot-io.github.io/mss-boot-docs/images/logos/logo-b.png"  alt="https://github.com/mss-boot-io/mss-boot"/>
 
-Install `node_modules`:
+[![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/mss-boot-io/mss-boot) [![Build Status](https://travis-ci.org/mss-boot-io/mss-boot.svg?branch=main)](https://travis-ci.org/mss-boot-io/mss-boot) [![Coverage Status](https://coveralls.io/repos/github/mss-boot-io/mss-boot/badge.svg?branch=main)](https://coveralls.io/github/mss-boot-io/mss-boot?branch=main)
 
-```bash
-npm install
-```
+English | [简体中文](https://github.com/mss-boot-io/mss-boot-frontend/blob/main/README.Zh-cn.md)
 
-or
+An enterprise-level language heterogeneous microservice solution that supports grpc and http protocols. The single-service code framework adheres to the principle of minimalism, while providing complete devops process support (gitops).
 
-```bash
-yarn
-```
+[documentation](https://mss-boot-io.github.io/mss-boot-docs/index.html)
 
-## Provided Scripts
+[microservices](https://github.com/mss-boot-io/mss-boot-monorepo)
 
-Ant Design Pro provides some useful script to help you quick start and build with web project, code style check and test.
+## ✨ feature
 
-Scripts provided in `package.json`. It's safe to modify or add additional script:
+> - Follow RESTful API Design Specifications
+> - Login support idp(dex)
+> - Support for Swagger documentation (based on swaggo)
+> - code generation tool
+> - Perfect cicd package
 
-### Start project
+## todo list
 
-```bash
-npm start
-```
+> - [ ] Support tenants
+> - [ ] Support dynamodb
+> - [ ] Support config provider
+> - [ ] Support istio traces
+> - [ ] Out-of-the-box support
 
-### Build project
+## JetBrains open source certificate support
 
-```bash
-npm run build
-```
+The `mss-boot-io` project has always been developed in the GoLand integrated development environment under JetBrains, based on the **free JetBrains Open Source license(s)** genuine free license. I would like to express my gratitude.
 
-### Check code style
+<a href="https://www.jetbrains.com/?from=kubeadm-ha" target="_blank"><img src="https://raw.githubusercontent.com/panjf2000/illustrations/master/jetbrains/jetbrains-variant-4.png" width="250" align="middle"/></a>
 
-```bash
-npm run lint
-```
+## 🔑 License
 
-You can also use script to auto fix some lint error:
+[MIT](https://raw.githubusercontent.com/mss-boot-io/mss-boot/main/LICENSE)
 
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+Copyright (c) 2022 mss-boot-io
