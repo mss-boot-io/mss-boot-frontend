@@ -1,0 +1,14 @@
+name: "Deploy Features"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    uses: mss-boot-io/mss-boot-frontend/.github/workflows/deploy-cloudflare.yml@main
+    with:
+      stage: "beta"
+    secrets:
+      cf_api_token: ${{ secrets.cf_api_token }}
