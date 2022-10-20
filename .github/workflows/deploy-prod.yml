@@ -1,8 +1,9 @@
 name: "Deploy Main"
 
 on:
-  tag:
-    - v*
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   build:
