@@ -178,13 +178,16 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 export const request = {
   middlewares: [
     async function middlewareToken(ctx, next) {
+      const { req } = ctx;
+      const { url, options } = req;
+      req.url = `${API_URL}${url}`;
+
       const token = JSON.parse(localStorage.getItem('token'));
       if (!token) {
         await next();
         return;
       }
-      const { req } = ctx;
-      const { url, options } = req;
+
       if (url.indexOf('/admin/api/v1/callback') != 0 || url.indexOf('/admin/api/v1/client') != 0) {
         options.headers = {
           ...options.headers,
@@ -192,7 +195,7 @@ export const request = {
         };
         ctx.req.options = options;
       }
-      req.url = `${API_URL}${url}`;
+
       await next();
       const { res } = ctx;
       const { errorCode } = res;

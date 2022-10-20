@@ -3,6 +3,6 @@ import { defineConfig } from 'umi';
 
 export default defineConfig({
   define: {
-    API_URL: 'https://beta.api.mss-boot-io.top',
+    API_URL: 'https://alpha.api.mss-boot-io.top',
   },
 });
