@@ -192,6 +192,7 @@ export const request = {
         };
         ctx.req.options = options;
       }
+      req.url = `${API_URL}${url}`;
       await next();
       const { res } = ctx;
       const { errorCode } = res;
